@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Faculty Directory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #131f3f; /* Bluish-black background */
+            color: #fff;
+            width: auto;
+            
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .college-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #ff6a3d;
+            font-size: 2.5rem;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .faculty-card {
+            background-color: #2d3a5f;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 400px; /* Set a specific height for the faculty card */
+        }
+
+        .hod-card {
+            background-color: #2d3a5f;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 400px; /* Set a specific height for the faculty card */
+            width: 50%; 
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 250px; /* Adjust the image height accordingly */
+            object-fit: cover;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .faculty-info {
+            padding: 20px;
+        }
+
+        .faculty-name {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: #f9db6d;
+        }
+
+        .faculty-title {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #9eafec;
+        }
+
+        .popup-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 34, 56, 0.95);
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+
+        .faculty-card:hover .popup-info {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hod-card:hover .popup-info {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qualification {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .qualification-title {
+            font-weight: bold;
+            color: #ff6a3d;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #3a4979;
+        }
+
+        .blue-line {
+            width: 100%;  /* Adjust width */
+            height: 2px;  /* Adjust thickness */
+            background-color: rgb(51, 51, 131);
+            margin: 20px auto;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/api/placeholder/1200/300" alt="College Campus" class="college-image">
+            <h1>AMC Engineering College</h1>
+            <p>Home to brilliant minds shaping the future</p>
+        </header>
+
+        <h2>HOD of CSE Department</h2>
+        <div class="hod-card">
+            <img src="faculty-photos\faculty-ramya-mam.png" alt="Dr. V Mareeswari" class="faculty-image">
+            <div class="faculty-info">
+                <h3 class="faculty-name">Dr. V Mareeswari</h3>
+                <p class="faculty-title">HOD of Computer Science</p>
+            </div>
+            <div class="popup-info">
+                <h3 class="faculty-name">Dr. V Mareeswari</h3>
+                <p class="faculty-title">HOD of Computer Science</p>
+                
+                <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Science, MIT (2008)</p>
+                <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering, Stanford University (2004)</p>
+                <p class="qualification"><span class="qualification-title">B.Tech.</span> - Information Technology, Georgia Tech (2002)</p>
+                
+                <p class="qualification"><span class="qualification-title">Specializations:</span> Artificial Intelligence, Machine Learning, Neural Networks</p>
+                
+                <p class="qualification"><span class="qualification-title">Publications:</span> 45+ research papers in top-tier journals</p>
+            </div>
+        </div>
+        <div class="blue-line"></div>
+        <br><br>
+        <h2>Our Distinguished Faculty</h2>
+        <div class="faculty-grid">
+            <!-- Faculty Member 1 -->
+            
+            <div class="faculty-card">
+                <img src="C:\Users\Naveen\OneDrive\Desktop\Student Database Management\AMC-Connect\images\faculty-ramya-mam.png" alt="Prof. Velvizhi Ramya" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Velvizhi Ramya</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Velvizhi Ramya</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Science, MIT (2008)</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering, Stanford University (2004)</p>
+                    <p class="qualification"><span class="qualification-title">B.Tech.</span> - Information Technology, Georgia Tech (2002)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Artificial Intelligence, Machine Learning, Neural Networks</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Publications:</span> 45+ research papers in top-tier journals</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 2 -->
+            <div class="faculty-card">
+                <img src="/api/placeholder/300/280" alt="Prof. Mala" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Mala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Mala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Electrical Engineering, Caltech (2010)</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Electronics, University of Tokyo (2006)</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Electrical Engineering, UC Berkeley (2004)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Microelectronics, VLSI Design, Embedded Systems</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 3 -->
+            <div class="faculty-card">
+                <img src="/api/placeholder/300/280" alt="Prof. Mahalakshmi" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Mahalakshmi</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Mahalakshmi</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Mechanical Engineering, ETH Zurich (2007)</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Aerospace Engineering, University of Michigan (2003)</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Mechanical Engineering, Purdue University (2001)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Fluid Dynamics, Thermodynamics, Renewable Energy Systems</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Industry Experience:</span> Former Lead Engineer at NASA (5 years)</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 4 -->
+            <div class="faculty-card">
+                <img src="/api/placeholder/300/280" alt="Prof. Sanjeevan" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Sanjeevan</h3>
+                    <p class="faculty-title">Assistant Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Sanjeevan</h3>
+                    <p class="faculty-title">Assistant Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Statistics, Carnegie Mellon University (2015)</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Applied Mathematics, Oxford University (2011)</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Mathematics, University of Washington (2009)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Big Data Analytics, Statistical Learning, Predictive Modeling</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Awards:</span> National Science Foundation Early Career Award (2020)</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 5 -->
+            <div class="faculty-card">
+                <img src="/api/placeholder/300/280" alt="Prof. Pallavi K V" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Pallavi K V</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Pallavi K V</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Molecular Biology, Harvard University (2005)</p>
+                    <p class="qualification"><span class="qualification-title">M.D.</span> - Johns Hopkins University (2003)</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Biochemistry, UCLA (1998)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Genetic Engineering, CRISPR Technology, Biopharmaceuticals</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Research:</span> Led breakthrough research in gene therapy applications</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 6 -->
+            <div class="faculty-card">
+                <img src="/api/placeholder/300/280" alt="Prof. Anand Kumar B" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Anand Kumar B</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Anand Kumar B</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Structural Engineering, University of Cambridge (2012)</p>
+                    <p class="qualification"><span class="qualification-title">M.Eng.</span> - Civil Engineering, Imperial College London (2008)</p>
+                    <p class="qualification"><span class="qualification-title">B.Eng.</span> - Civil Engineering, University of Toronto (2006)</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Earthquake Engineering, Sustainable Infrastructure, Bridge Design</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Projects:</span> Lead designer for award-winning sustainable bridges in 3 countries</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 AMC Engineering College. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
