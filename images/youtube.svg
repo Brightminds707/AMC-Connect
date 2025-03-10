@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29" height="29" viewBox="0 0 29 29">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="24" height="24" rx="5" transform="translate(-0.011 -0.011)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </clipPath>
+    <clipPath id="clip-iPhone_12_12_Pro_1">
+      <rect width="29" height="29"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_12_12_Pro_1" data-name="iPhone 12, 12 Pro – 1" clip-path="url(#clip-iPhone_12_12_Pro_1)">
+    <g id="_20862401111543238897" data-name="20862401111543238897" transform="translate(0.912 0.912)">
+      <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(2.098 2.098)" clip-path="url(#clip-path)">
+        <g id="Page-1" transform="translate(0 3.497)">
+          <g id="Social-Icons---Isolated" transform="translate(0)">
+            <path id="Youtube" d="M84.68,245.375V238.59l6.479,3.4Zm14.225-7.961a5.25,5.25,0,0,0-.953-2.4,3.412,3.412,0,0,0-2.4-1.023c-3.356-.245-8.389-.245-8.389-.245h-.01s-5.033,0-8.389.245a3.414,3.414,0,0,0-2.4,1.023,5.246,5.246,0,0,0-.952,2.4,36.787,36.787,0,0,0-.24,3.908v1.832a36.769,36.769,0,0,0,.24,3.908,5.246,5.246,0,0,0,.952,2.4A4.047,4.047,0,0,0,79,250.492c1.918.186,8.153.243,8.153.243s5.039-.008,8.394-.252a3.417,3.417,0,0,0,2.4-1.023,5.25,5.25,0,0,0,.953-2.4,36.767,36.767,0,0,0,.24-3.908v-1.832a36.786,36.786,0,0,0-.24-3.908Z" transform="translate(-75.167 -233.75)" fill="#fff" fill-rule="evenodd"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
