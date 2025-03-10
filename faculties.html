@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Faculty Directory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #131f3f; /* Bluish-black background */
+            color: #fff;
+            width: auto;
+            
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .college-image {
+            width: 100%;
+            max-width: 1500px; /* Adjust based on your layout */
+            height: 500px; /* Maintains aspect ratio */
+            max-height: 600px; /* Ensures image is not too tall */
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.6); /* Softer shadow */
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%);
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .college-image {
+                max-width: 100%; /* Full width on smaller screens */
+                max-height: 350px; /* Adjust height for tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .college-image {
+                max-width: 100%;
+                max-height: 300px; /* Smaller image for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .college-image {
+                max-height: 250px; /* Further reduce size on small devices */
+                box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+
+        h1 {
+            margin-top: 20px;
+            color: #ff6a3d;
+            font-size: 2.5rem;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .faculty-card {
+            background-color: #2d3a5f;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 400px; /* Set a specific height for the faculty card */
+        }
+
+        .hod-card {
+            background-color: #2d3a5f;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 400px; /* Set a specific height for the faculty card */
+            width: 50%; 
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 250px; /* Adjust the image height accordingly */
+            object-fit: cover;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .faculty-info {
+            padding: 20px;
+        }
+
+        .faculty-name {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: #f9db6d;
+        }
+
+        .faculty-title {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #9eafec;
+        }
+
+        .popup-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 34, 56, 0.95);
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+
+        .faculty-card:hover .popup-info {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hod-card:hover .popup-info {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qualification {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .qualification-title {
+            font-weight: bold;
+            color: #ff6a3d;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #3a4979;
+        }
+
+        .blue-line {
+            width: 100%;  /* Adjust width */
+            height: 2px;  /* Adjust thickness */
+            background-color: rgb(53, 53, 112);
+            margin: 20px auto;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .background {
+            position: fixed; /* Cover entire page */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background::before {
+            content: '';
+            background-image: url(../images/cse_dept.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Keeps the image behind other content */
+            opacity: 0.1; /* Adjust transparency for overlay effect */
+        }
+
+        /* Optional: Add overlay text */
+        .overlay-text {
+            font-size: 50px; /* Bigger text */
+            color: rgb(3, 18, 77); /* Text color */
+            font-weight: bold;
+            text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.6); /* Softer glow effect */
+            opacity: 0.8; /* Slight transparency for fading effect */
+    
+        /* Optional: Fading out effect using a gradient mask */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+        }
+
+
+        .text-overlay {
+            position: absolute;
+            top: 20px; /* Adjust to move text down */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            color: #04050a;
+            font-size: 2.5rem;
+            padding: 10px 20px;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            border-radius: 5px; /* Optional rounded corners */
+            white-space: 5; /* Prevent text from wrapping */
+        }
+
+        p1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: larger;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <img src="C:\Users\Naveen\OneDrive\Desktop\AMCEC-CSE-Web-Page\AMC-Connect\images\amc1.png"  alt="College Campus" class="college-image">
+
+    <div class="container">
+
+        <header>
+            <h1>AMC Engineering College</h1> <br>
+            <p1>Home to Brilliant Minds Shaping the Future</p1>
+            <div class="text-overlay">
+                <div class="overlay-text">Welcome to CSE Department</div>
+            </div>
+        </header>
+
+        <h2>HOD of CSE Department</h2>
+        <br>
+        <div class="hod-card">
+            <img src="hod-mam.png" alt="Dr. V Mareeswari" class="faculty-image">
+            <div class="faculty-info">
+                <h3 class="faculty-name">Dr. V Mareeswari</h3>
+                <p class="faculty-title">HOD of Computer Science</p>
+            </div>
+            <div class="popup-info">
+                <h3 class="faculty-name">Dr. V Mareeswari</h3>
+                <p class="faculty-title">HOD of Computer Science</p>
+                
+                <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Science, MIT (2008)</p>
+                <p class="qualification"><span class="qualification-title">B.Tech.</span> - Information Technology, Georgia Tech (2002)</p>
+                <p class="qualification"><span class="qualification-title">Specializations:</span> Artificial Intelligence, Machine Learning</p>
+                <p class="qualification"><span class="qualification-title">Publications:</span> 45+ research papers in top-tier journals</p>
+            </div>
+        </div>
+        <div class="blue-line"></div>
+        <br><br>
+        <h2>Our Distinguished Faculty</h2>
+        <br><br>
+        <div class="faculty-grid">
+            <!-- Faculty Member 1 -->
+            
+            <div class="faculty-card">
+                <img src="images\faculty-ramya-mam.png" alt="Prof. Velvizhi Ramya" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Velvizhi Ramya</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Velvizhi Ramya</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Science</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.Tech.</span> - Information Technology</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Artificial Intelligence, Machine Learning</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Publications:</span> 45+ research papers in top-tier journals</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 2 -->
+            <div class="faculty-card">
+                <img src="mala-mam.png" alt="Prof. Mala" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Mala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Mala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 3 -->
+            <div class="faculty-card">
+                <img src="mahalakshmi-mam.png" alt="Prof. Mahalakshmi" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Mahalakshmi</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Mahalakshmi</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Cloud Computing</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Industry Experience:</span> Former Lead Engineer </p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 4 -->
+            <div class="faculty-card">
+                <img src="sanjeevan-sir.png" alt="Prof. Sanjeevan" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Sanjeevan</h3>
+                    <p class="faculty-title">Assistant Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Sanjeevan</h3>
+                    <p class="faculty-title">Assistant Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Awards:</span> AI</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 5 -->
+            <div class="faculty-card">
+                <img src="pallavi-mam.png" alt="Prof. Pallavi K V" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Pallavi K V</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Pallavi K V</h3>
+                    <p class="faculty-title">Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">M.D.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.S.</span> - Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Research:</span> Computer Engineering</p>
+                </div>
+            </div>
+
+            <!-- Faculty Member 6 -->
+            <div class="faculty-card">
+                <img src="anand-sir.png" alt="Prof. Anand Kumar B" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Anand Kumar B</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Anand Kumar B</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">M.Eng.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.Eng.</span> - Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Specializations:</span> Computer Engineering</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Projects:</span> Computer Engineering</p>
+                </div>
+            </div>
+            <!-- Faculty Member 7 -->
+            <div class="faculty-card">
+                <img src="nirmala-mam.png" alt="Dr. Nirmala " class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Dr. Nirmala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Nirmala</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            <!-- Faculty Member 8 -->
+            <div class="faculty-card">
+                <img src="sangeetha-mam.png" alt="Prof. Sangeetha " class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Sangeetha</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Sangeetha</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            <!-- Faculty Member 9 -->
+            <div class="faculty-card">
+                <img src="snigdha-mam.png" alt="Prof. Snigdha Kesh" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Snigdha Kesh</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Snigdha Kesh</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            <!-- Faculty Member 10 -->
+            <div class="faculty-card">
+                <img src="doddegowda-sir.png" alt="Prof. Doddegowda" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Doddegowda</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Doddegowda</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            <!-- Faculty Member 11 -->
+            <div class="faculty-card">
+                <img src="parthasarathy-sir.png" alt="Prof. Parthasarathy" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Parthasarathy</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Parthasarathy</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            <!-- Faculty Member 12 -->
+            <div class="faculty-card">
+                <img src="rabindranath-sir.png" alt="Prof. Rabindranath" class="faculty-image">
+                <div class="faculty-info">
+                    <h3 class="faculty-name">Prof. Rabindranath</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                </div>
+                <div class="popup-info">
+                    <h3 class="faculty-name">Prof. Rabindranath</h3>
+                    <p class="faculty-title">Associate Professor of Computer Science</p>
+                    
+                    <p class="qualification"><span class="qualification-title">Ph.D.</span> - Computer Engineering </p>
+                    <p class="qualification"><span class="qualification-title">M.S.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">B.E.</span> - Computer Engineering</p>
+                    <p class="qualification"><span class="qualification-title">Specializations:</span>  Web Development </p>
+                    <p class="qualification"><span class="qualification-title">Patents:</span> 8 patents in semiconductor technology</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <footer>
+            <p>&copy; 2025 AMC Engineering College. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
